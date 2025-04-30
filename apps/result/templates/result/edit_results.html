@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Update Results{% endblock title %}
+
+{% block content %}
+<form method="POST">
+  {% csrf_token %}
+  {{ form.management_form }}
+
+  <table id="studenttable" class="table table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Test Score</th>
+        <th>Exam Score</th>
+        <th>Total</th>
+        <th>Delete</th>
+        <th>Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form in form.forms %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ form.instance.student }}</td>
+          <td>{{ form.instance.subject }}</td>
+          <td style="width: 10%;">
+            {% render_field form.test_score class="form-control form-control-sm" %}
+            {{ form.id }}  <!-- This hidden field is CRUCIAL -->
+            {% if form.test_score.errors %}
+              <div class="text-danger small">{{ form.test_score.errors }}</div>
+            {% endif %}
+          </td>
+          <td style="width: 10%;">
+            {% render_field form.exam_score class="form-control form-control-sm" %}
+            {% if form.exam_score.errors %}
+              <div class="text-danger small">{{ form.exam_score.errors }}</div>
+            {% endif %}
+          </td>
+          <td>{{ form.instance.total_score }}</td>
+          <td>
+            {% render_field form.DELETE class="form-check-input" %}
+          </td>
+          <td>{{ form.instance.current_class }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <input type="submit" class="btn btn-success" value="Save">
+</form>
+
+{% if form.non_form_errors %}
+<div class="alert alert-danger mt-3">
+  {% for error in form.non_form_errors %}
+    {{ error }}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock content %}
+
+{% block morejs %}
+<script>
+  $('#studenttable').DataTable({
+    select: false
+  });
+</script>
+{% endblock morejs %}

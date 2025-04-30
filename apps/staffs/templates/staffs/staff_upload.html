@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Upload Bulk Staff from file
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="col alert alert-info">
+  <h3>Instruction</h3>
+  <p>
+      Please 
+      <a href="{% url 'download-csv' %}" style="text-decoration: underline; font-weight: bold;">
+          Download the CSV file attached here
+      </a>. 
+      Fill in the sheet and upload the same file back to this page. 
+      <strong>DO NOT EDIT THE FIRST ROW.</strong> 
+      The second row is for sample purposes; replace it with your data.
+  </p>
+</div>
+
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'corecode/form_snippet.html' %}
+
+    <input type="submit" class="btn btn-success" value="Submit">
+  </form>
+
+{% endblock content %}

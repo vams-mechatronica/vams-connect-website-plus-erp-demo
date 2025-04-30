@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content-header %}
+<div class="card-header">
+  <div class="card-tools">
+    <a href="#" role="button" class="btn btn-tool" onclick="printarea();">Print</a>
+    <a href="{% url 'invoice-update' object.id %}" class="btn btn-tool {% if not object.is_editable %}disabled{% endif %}">
+      <i class="fas fa-edit"></i>
+    </a>
+    <a href="{% url 'invoice-delete' object.id %}" class="btn btn-tool {% if not object.is_editable %}disabled{% endif %}">
+      <i class="fas fa-times"></i>
+    </a>
+  </div>
+</div>
+{% endblock content-header %}
+
+
+
+{% block content %}
+
+<div class="row printable-area">
+  <div class="col-sm-4">
+    <h3>{{ object }} </h3>
+    <h5>Session: {{ object.session }} </h5>
+    <h5>Term  : {{ object.term }} </h5>
+    <h5>Month : {{ object.month  }} </h5>
+    <h5>Class : {{ object.class_for }} </h5><br>
+    <h6>
+      Status: 
+      <span class="badge {% if object.get_status_display == 'Active' %}bg-success{% elif object.get_status_display == 'Closed' %}bg-danger{% endif %}">
+        {{ object.get_status_display }}
+      </span>
+    </h6>
+    
+    <br><br>
+    <hr>
+    <div>
+      <h4>Expected Balance: {{ object.balance | intcomma }}</h4>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <table class="table table-sm table-bordered">
+      <div style="text-align:center;">Invoice Breakdown</div></br>
+      <thead class="thead-light">
+        <tr>
+          <th>S/N</th>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ forloop.counter }} </td>
+          <td>{{ item.description }} </td>
+          <td>{{ item.amount }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td>Total Amount this month</td>
+          <td>{{ object.amount_payable | intcomma}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Balance from previous month</td>
+          <td>{{ object.previous_balance | intcomma }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Total Amount Payable</td>
+          <td>{{ object.total_amount_payable | intcomma}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Total Amount Paid</td>
+          <td>{{ object.total_amount_paid | intcomma}}</td>
+        </tr>
+
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<h5>Payment History</h5>
+<table class="table table-bordered table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>S/N</th>
+      <th>Amount Paid</th>
+      <th>Date Paid</th>
+      <th>Payment Type</th>
+      <th>Comment Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for receipt in receipts %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ receipt.amount_paid}}</td>
+      <td>{{ receipt.date_paid}}</td>
+      <td>{{ receipt.payment_mode}}</td>
+      <td>{{ receipt.comment}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}
+
+

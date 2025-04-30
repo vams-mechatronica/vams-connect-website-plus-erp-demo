@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}  <!-- Load widget_tweaks instead of django_select2 -->
+
+{% block title %}
+  {% if object %}
+    Update {{ object }}
+  {% else %}
+    Add New User
+  {% endif %}
+{% endblock title %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% include 'corecode/form_snippet.html' %}
+
+  <script>
+    function updateUserList(selectElement) {
+        var role = selectElement.value;
+        var url = "{% url 'get_users_list' %}?role=" + role;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var dropdown = document.querySelector('select[name="selected_person"]');
+                dropdown.innerHTML = '<option value="">Select User</option>';
+
+                data.forEach(item => {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    dropdown.appendChild(option);
+                });
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectedPersonDropdown = document.querySelector('select[name="selected_person"]');
+
+        selectedPersonDropdown.addEventListener('change', function() {
+            const selectedText = selectedPersonDropdown.options[selectedPersonDropdown.selectedIndex].text.trim();
+            const [firstName, lastName] = selectedText.split(' ', 2);
+
+            document.getElementById('id_first_name').value = firstName || '';
+            document.getElementById('id_last_name').value = lastName || '';
+            document.getElementById('id_username').value = `${lastName?.toLowerCase() || ''}.${firstName?.toLowerCase() || ''}`;
+        });
+    });
+</script>
+
+
+  <input type="submit" class="btn btn-primary" value="{{ object|yesno:"Update Record,Create User" }}">
+</form>
+
+{{ form.media }}  <!-- Load necessary JS for Select2 -->
+{% endblock content %}

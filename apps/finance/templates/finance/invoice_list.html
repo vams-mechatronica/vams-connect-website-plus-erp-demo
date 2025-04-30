@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Invoices{% endblock title %}
+
+{% block breadcrumb %}
+{% if request.user.is_superuser %}
+<a class="btn btn-primary" href="{% url 'invoice-create' %}"><i
+    class="fas fa-plus"></i> New Invoice</a>
+<a class="btn btn-primary" href="{% url 'bulk-invoice' %}"><i
+    class="fas fa-upload"></i> Bulk Invoice</a>
+{% endif %}
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="table-responsive">
+    <table id="invoicetable" class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>S/N</th>
+          <th>invoice</th>
+          <th>Session-term</th>
+          <th>Total Payable</th>
+          <th>Total Paid</th>
+          <th>Balance</th>
+          <th>Status</th>
+          <th>Updated At</th>
+          {% if request.user.is_superuser %}
+          <th>Action</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for invoice in object_list %}
+          <tr class='clickable-row' data-href="{% if request.user.is_superuser %}{% url 'invoice-detail' invoice.id %}{% else %}#{% endif %}">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ invoice }}</td>
+            <td>{{ invoice.session }} - {{ invoice.term }}</td>
+            <td>{{ invoice.total_amount_payable | intcomma }}</td>
+            <td>{{ invoice.total_amount_paid | intcomma }}</td>
+            <td>{{ invoice.balance | intcomma }}</td>
+            <td>
+              <span class="badge {% if invoice.status %}bg-success{% else %}bg-danger{% endif %}">
+                {% if invoice.status %}Active{% else %}Closed{% endif %}
+              </span>
+            </td>
+            <td>{{ invoice.updated_at }}</td>
+            
+            {% if request.user.is_superuser %}
+              <td>
+                <a class="btn btn-sm {% if invoice.status %}btn-success{% else %}btn-danger disabled{% endif %}"
+                  href="{% url 'receipt-create' %}?invoice={{ invoice.id }}">
+                  {% if invoice.status %}Add new receipt{% else %}Disabled{% endif %}
+                </a>
+
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+
+
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+
+
+{% block morejs %}
+<script>
+   $('#invoicetable').DataTable({
+    select: false
+    });
+</script>
+
+{% endblock morejs %}
