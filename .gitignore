@@ -56,7 +56,7 @@ ENV/
 
 # Static files (collected)
 staticfiles/
-static/
+
 
 # Media files
 media/
