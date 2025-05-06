@@ -1,0 +1,1377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAMSConnect ERP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "dist/css/landing.css" %}">
+</head>
+
+<body>
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{% static "dist/img/main-logo.png" %}"
+                    alt="VAMSConnect Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#why-us">Why Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing-section">Price</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero-section" id="home">
+        <div id="edu-slider" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#edu-slider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#edu-slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#edu-slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="slide-content animate-on-scroll">
+                                    <h1 class="mb-3">VAMSConnect ERP<span class="tm"><i class="fas fa-registered"></i></span></h1>
+                                    <h6 class="mb-lg-0">An advanced and comprehensive school management software</h6>
+                                    <div class="mt-4">
+                                        <a href="#contact" class="btn btn-primary btn-lg">Request Demo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="slide-view text-center position-relative animate-on-scroll">
+                                    <img src="{% static 'dist/img/feature-1.png' %}" alt="School Management Software" class="sv-main simply-mobile-slider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="slide-content animate-on-scroll">
+                                    <h1 class="mb-3">Helping 500+ Schools Globally</h1>
+                                    <h6 class="mb-lg-0">India's top 4 out of 10 residential schools run on VAMSConnect</h6>
+                                    <div class="mt-4">
+                                        <a href="#contact" class="btn btn-primary btn-lg">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="slide-view text-center position-relative animate-on-scroll">
+                                    <img src="{% static 'dist/img/feature-2.png' %}" alt="Happy students at school" class="sv-main">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="slide-content animate-on-scroll">
+                                    <h1 class="mb-3">Finance Management</h1>
+                                    <h6 class="mb-lg-0">Streamline fee collection, budgeting, payroll, and financial reporting in one place</h6>
+                                    <div class="mt-4">
+                                        <a href="#contact" class="btn btn-primary btn-lg">Get Started</a>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="slide-view text-center position-relative animate-on-scroll">
+                                    <img src="{% static 'dist/img/feature-3.png' %}" alt="E-Learning Platform" class="sv-main">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End of carousel-inner -->
+        </div> <!-- End of #edu-slider -->
+    </section>
+
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="form-section animate-on-scroll">
+                <h1 class="form-title">Get VAMSConnect ERP for your school</h1>
+    
+                <form id="contactForm">
+                    <div class="row">
+                        <!-- First row with 3 inputs -->
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="text" class="form-control" id="fullName" placeholder=" " required>
+                                <label for="fullName">Full Name</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="text" class="form-control" id="school" placeholder=" " required>
+                                <label for="school">School/Organization</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="text" class="form-control" id="city" placeholder=" ">
+                                <label for="city">City</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+    
+                        <!-- Second row with 3 inputs -->
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="email" class="form-control" id="email" placeholder=" " required>
+                                <label for="email">Email ID</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="url" class="form-control" id="website_input" placeholder=" ">
+                                <label for="website_input">Website</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group floating-input">
+                                <input type="tel" class="form-control" id="mobile" placeholder=" " required>
+                                <label for="mobile">Mobile Number</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+    
+                        <!-- Third row with address -->
+                        <div class="col-6">
+                            <div class="form-group floating-input">
+                                <input type="text" class="form-control" id="address" placeholder=" ">
+                                <label for="address">Address</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+    
+                        <!-- Fourth row with message -->
+                        <div class="col-6">
+                            <div class="form-group floating-input">
+                                <textarea class="form-control" id="message" placeholder=" " rows="3" required></textarea>
+                                <label for="message">Your Message</label>
+                                <div class="underline"></div>
+                            </div>
+                        </div>
+    
+                        <!-- Fifth row with CAPTCHA and submit -->
+                        <div class="col-12">
+                            <div class="captcha-container">
+                                <div>
+                                    <div class="captcha-checkbox" id="captchaCheckbox">
+                                        <div class="checkbox">
+                                            <span class="checkbox-icon">✓</span>
+                                        </div>
+                                        <span class="captcha-text">I'm not a robot</span>
+                                    </div>
+    
+                                    <div class="captcha-footer">
+                                        mCAPTCHA <a href="#">Privacy</a> <a href="#">Terms</a>
+                                    </div>
+                                </div>
+                                <button class="submit-btn" id="submitBtn" type="button" disabled>SUBMIT</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h1>Our Comprehensive Offerings</h1>
+                <p>Join the League of India's most futuristic and comprehensive School Management Software that meets
+                    all your school-specific needs.</p>
+            </div>
+
+            <div class="features-tabs animate-on-scroll">
+                <div class="tabs-container">
+                    <button class="tab active" onclick="openTab(event, 'school-erp')">School ERP</button>
+                    <button class="tab" onclick="openTab(event, 'administration')">Administration</button>
+                    <button class="tab" onclick="openTab(event, 'mobile-app')">Mobile App</button>
+                    <button class="tab" onclick="openTab(event, 'e-learning')">E-Learning</button>
+                    <button class="tab" onclick="openTab(event, 'website')">Website</button>
+                </div>
+
+                <!-- School ERP Tab -->
+                <div id="school-erp" class="tab-content active">
+                    <h2>School ERP</h2>
+                    <p>Comprehensive school management solution with integrated modules for all your needs.</p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev" onclick="moveCarousel(this.parentNode, -1)">❮</button>
+                        <div class="card-scroll-container">
+                            <div class="card-container">
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+                                        <h3 class="mb-0">Mobile App</h3>
+                                    </div>
+                                    <p>Access all school management features on the go with our dedicated mobile applications.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                        </div>
+                                        <h3 class="mb-0">E-Learning</h3>
+                                    </div>
+                                    <p>Digital learning platform with online classes, assignments, and examination systems.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-globe"></i>
+                                        </div>
+                                        <h3 class="mb-0">Website</h3>
+                                    </div>
+                                    <p>Professional school website with content management system and dynamic features.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-microchip"></i>
+                                        </div>
+                                        <h3 class="mb-0">Smart Technology</h3>
+                                    </div>
+                                    <p>Innovative solutions like barcode, QR code, and AI integration for modern schools.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-arrow next" onclick="moveCarousel(this.parentNode, 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 0)"></span>
+                        <span class="dot"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 1)"></span>
+                    </div>
+                </div>
+
+                <!-- Other tabs follow the same pattern -->
+                <!-- Administration Tab -->
+                <div id="administration" class="tab-content">
+                    <h2>Administration</h2>
+                    <p>Now those complex and time-consuming day-to-day administrative processes can be simplified.</p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev" onclick="moveCarousel(this.parentNode, -1)">❮</button>
+                        <div class="card-scroll-container">
+                            <div class="card-container">
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <h3 class="mb-0">Human Resources</h3>
+                                    </div>
+                                    <p>Human resources (HR) is the division charged with recruiting, screening, and training.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <h3 class="mb-0">Finance</h3>
+                                    </div>
+                                    <p>Keeping a close watch on every financial transaction of any nature and any magnitude.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <h3 class="mb-0">Academics</h3>
+                                    </div>
+                                    <p>In this digital era, from banking to education most things have gone online.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-arrow next" onclick="moveCarousel(this.parentNode, 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 0)"></span>
+                    </div>
+                </div>
+
+                <!-- Mobile App Tab -->
+                <div id="mobile-app" class="tab-content">
+                    <h2>Mobile App Features</h2>
+                    <p>Access school management features anytime, anywhere through our mobile applications.</p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev" onclick="moveCarousel(this.parentNode, -1)">❮</button>
+                        <div class="card-scroll-container">
+                            <div class="card-container">
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-id-card"></i>
+                                        </div>
+                                        <h3 class="mb-0">Visitor App</h3>
+                                    </div>
+                                    <p>The Visitor management app helps schools to keep track of and categorize visitors.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-bus-alt"></i>
+                                        </div>
+                                        <h3 class="mb-0">Transport App</h3>
+                                    </div>
+                                    <p>Track school transportation without GPS devices - just an Android device required.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-user-graduate"></i>
+                                        </div>
+                                        <h3 class="mb-0">Student App</h3>
+                                    </div>
+                                    <p>Includes circulars, homework, e-learning, fee submission, and many more features.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-chalkboard"></i>
+                                        </div>
+                                        <h3 class="mb-0">Teacher App</h3>
+                                    </div>
+                                    <p>Teachers can access multiple options essential for their daily tasks and reporting.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-arrow next" onclick="moveCarousel(this.parentNode, 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 0)"></span>
+                        <span class="dot"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 1)"></span>
+                    </div>
+                </div>
+
+                <!-- E-Learning Tab -->
+                <div id="e-learning" class="tab-content">
+                    <h2>E-Learning Features</h2>
+                    <p>Comprehensive digital learning solutions integrated with your school management system.</p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev" onclick="moveCarousel(this.parentNode, -1)">❮</button>
+                        <div class="card-scroll-container">
+                            <div class="card-container">
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-video"></i>
+                                        </div>
+                                        <h3 class="mb-0">Exam Proctoring</h3>
+                                    </div>
+                                    <p>PowerTEST - a powerful online examination proctoring solution for remote assessments.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-laptop"></i>
+                                        </div>
+                                        <h3 class="mb-0">Online Classes</h3>
+                                    </div>
+                                    <p>Integration with G-Suite and Microsoft Office for seamless virtual classroom experience.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-folder-open"></i>
+                                        </div>
+                                        <h3 class="mb-0">Digital Content</h3>
+                                    </div>
+                                    <p>Students can access learning resources in various formats like videos, PDFs, and more.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <h3 class="mb-0">Online Assignment</h3>
+                                    </div>
+                                    <p>Create different types of assignments, homework, and project work with easy submission.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-arrow next" onclick="moveCarousel(this.parentNode, 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 0)"></span>
+                        <span class="dot"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 1)"></span>
+                    </div>
+                </div>
+
+                <!-- Website Tab -->
+                <div id="website" class="tab-content">
+                    <h2>Website Features</h2>
+                    <p>Professional school website with content management and integration with school ERP.</p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-arrow prev" onclick="moveCarousel(this.parentNode, -1)">❮</button>
+                        <div class="card-scroll-container">
+                            <div class="card-container">
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-desktop"></i>
+                                        </div>
+                                        <h3 class="mb-0">Responsive Website</h3>
+                                    </div>
+                                    <p>VAMSConnect technology has hands-on experience in developing responsive websites that are auto-adjusting for all devices.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-database"></i>
+                                        </div>
+                                        <h3 class="mb-0">Dynamic Content</h3>
+                                    </div>
+                                    <p>Integrated with VAMSConnect ERP for Enquiries, Birthdays, Circulars, Notices, Calendar, News, Image galleries and more.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <h3 class="mb-0">CMS</h3>
+                                    </div>
+                                    <p>The content management system comprises relevant content that can be updated on the website easily by school staff.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="card">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="feature-icon-circle me-2">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <h3 class="mb-0">SEO and SMO</h3>
+                                    </div>
+                                    <p>Search Engine Optimisation (SEO) is a potent mechanism which helps to enhance the online visibility of your school.</p>
+                                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-arrow next" onclick="moveCarousel(this.parentNode, 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 0)"></span>
+                        <span class="dot"
+                            onclick="slideTo(this.parentNode.parentNode.querySelector('.carousel-container'), 1)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why VAMSConnect Section -->
+    <section id="why-us" class="why-VAMSConnect-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h1>Why VAMSConnect School Management Software?</h1>
+                <p>VAMSConnect ERP has many salient features that a school requires for the smooth functioning of day-to-day
+                    tasks. This most advanced School ERP allows schools to go paperless and to have control over each
+                    and every report with just a click.</p>
+                <p>There are several reasons to have VAMSConnect ERP, a few of which are mentioned below.</p>
+            </div>
+
+            <div class="why-VAMSConnect animate-on-scroll">
+                <div class="features-list">
+                    <div class="feature-item active bold" data-tab="interface">Interface</div>
+                    <div class="feature-item" data-tab="security">Security</div>
+                    <div class="feature-item bold" data-tab="support">Support</div>
+                    <div class="feature-item bold" data-tab="accessibility">Accessibility</div>
+                    <div class="feature-item" data-tab="migrations">Migrations</div>
+                    <div class="feature-item bold" data-tab="communications">Communications</div>
+                    <div class="feature-item" data-tab="paperless">Paperless</div>
+                </div>
+
+                <div class="feature-content">
+                    <div class="feature-text">
+                        <h2>User-Friendly Interface</h2>
+                        <p>Our School ERP is created with users in mind. Anyone with basic knowledge of computers and
+                            email can start using an application within a few minutes of their first login. The User
+                            Interface of ERP school software being easy to use and quite interactive facilitates
+                            different users at school to manage operations efficiently without any technical help from
+                            an engineer.</p>
+                        <a href="#" class="connect-btn">Connect with us <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="feature-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                    </div>
+                </div>
+
+                <div class="tab-indicators">
+                    <div class="indicator active" data-tab="interface"></div>
+                    <div class="indicator" data-tab="security"></div>
+                    <div class="indicator" data-tab="support"></div>
+                    <div class="indicator" data-tab="accessibility"></div>
+                    <div class="indicator" data-tab="migrations"></div>
+                    <div class="indicator" data-tab="communications"></div>
+                    <div class="indicator" data-tab="paperless"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h1>What Our Customers Say</h1>
+                <p>We are proud to have a long list of satisfied customers who have trusted us with their school
+                    management needs.</p>
+            </div>
+
+            <div class="testimonials-container animate-on-scroll">
+                <button class="slider-nav prev">❮</button>
+
+                <div class="testimonial-slider">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>We</h3>
+                            <p>It fits our hull into rolling 3 years behind it. We remain and celebrate them. The job we
+                                are able to implement all the major no strength, at its best!</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>Little Flower Group of Schools</h3>
+                            <p>We have been using VAMSConnect for the last five years and must say that we have had very few
+                                issues. The system has helped us manage over 1 lakh student photographs and academic
+                                records efficiently. It has been instrumental in our success.</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>Seth MR Jalpuria Group</h3>
+                            <p>We implemented VAMSConnect across our unfamiliar schedule and are happy to observe how it
+                                meets our needs. The VG module and corporate office features help us track function
+                                progress effectively. We look forward to continuing this partnership.</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>Global Public School</h3>
+                            <p>VAMSConnect has transformed our school administration. The seamless integration between
+                                academics, finance, and communication modules has reduced our paperwork by 80%. The
+                                mobile app keeps parents engaged with real-time updates.</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>Sunshine International</h3>
+                            <p>After trying several school management systems, we finally found the perfect fit with
+                                VAMSConnect. The support team is exceptional, and the system's flexibility allows us to
+                                customize it for our international curriculum needs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <h3>City Montessori</h3>
+                            <p>The data migration process was smooth, and within weeks we were fully operational. The
+                                reporting features give us valuable insights, and the paperless approach aligns
+                                perfectly with our eco-friendly initiatives.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-nav next">❯</button>
+
+                <div class="slider-controls">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing-section" class="pricing-section">
+        <div class="section-header">
+            <h1>SCHOOL MANAGEMENT SOLUTIONS</h1>
+            <p>Choose the perfect package for your educational institution's needs</p>
+        </div>
+
+        <div class="pricing-cards">
+            <!-- Basic Package -->
+            <div class="pricing-card" onclick="selectCard(this)">
+                <h2>Starter</h2>
+                <div class="price">₹1499<span>/month</span></div>
+                <div class="discount-info">
+                    <p><strong>Special Offer!</strong> Get <span class="discount-percentage">20%</span> off on yearly subscription</p>
+                    <div class="yearly-price">
+                        <span class="original-yearly-price">₹17988</span>
+                        <span class="discounted-yearly-price">₹14391</span>
+                        <span>/year</span>
+                    </div>
+                </div>
+                <p class="description">Essential features for small schools and educational centers</p>
+                <ul class="pricing-features">
+                    <li><strong>Up to 500</strong> student records</li>
+                    <li><strong>Basic</strong> attendance tracking</li>
+                    <li><strong>Gradebook</strong> functionality</li>
+                    <li><strong>Email</strong> support</li>
+                    <li><strong>2 staff</strong> accounts included</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+            
+            
+            
+
+            <!-- Standard Package (Active by default) -->
+            <div class="pricing-card active" onclick="selectCard(this)">
+                <h2>Standard</h2>
+                <div class="price">₹2599<span>/month</span></div>
+                <div class="discount-info">
+                    <p><strong>Special Offer!</strong> Get <span class="discount-percentage">20%</span> off on yearly subscription</p>
+                    <div class="yearly-price">
+                        <span class="original-yearly-price">₹31188</span>
+                        <span class="discounted-yearly-price">₹24950</span>
+                        <span>/year</span>
+                    </div>
+                </div>
+                <p class="description">Comprehensive solution for growing educational institutions</p>
+                <ul class="pricing-features">
+                    <li><strong>Up to 2000</strong> student records</li>
+                    <li><strong>Advanced</strong> analytics dashboard</li>
+                    <li><strong>Parent portal</strong> access</li>
+                    <li><strong>Priority</strong> support</li>
+                    <li><strong>5 staff</strong> accounts included</li>
+                    <li><strong>Mobile app</strong> for teachers</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+
+            <!-- Premium Package -->
+            <div class="pricing-card" onclick="selectCard(this)">
+                <h2>Premium</h2>
+                <div class="price">₹4599<span>/month</span></div>
+                <div class="discount-info">
+                    <p><strong>Special Offer!</strong> Get <span class="discount-percentage">20%</span> off on yearly subscription</p>
+                    <div class="yearly-price">
+                        <span class="original-yearly-price">₹55188</span>
+                        <span class="discounted-yearly-price">₹44150</span>
+                        <span>/year</span>
+                    </div>
+                </div>
+                <p class="description">Enterprise solution for large schools and districts</p>
+                <ul class="pricing-features">
+                    <li><strong>Unlimited</strong> student records</li>
+                    <li><strong>Custom</strong> reporting tools</li>
+                    <li><strong>API access</strong> for integration</li>
+                    <li><strong>24/7</strong> dedicated support</li>
+                    <li><strong>Unlimited</strong> staff accounts</li>
+                    <li><strong>Full suite</strong> of mobile apps</li>
+                    <li><strong>Onboarding</strong> training</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h1>VAMSConnect</h1>
+                <p>School ERP • E-Learning • Mobile App</p>
+                <p>VAMSConnect ERP is India's most advanced school management software with mobile apps for students,
+                    parents, teachers and management.</p>
+            </div>
+
+            <div class="footer-services">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#">E-Learning Software</a></li>
+                    <li><a href="#">Online Classes</a></li>
+                    <li><a href="#">Payment Gateway</a></li>
+                    <li><a href="#">School Mobile App</a></li>
+                    <li><a href="#">Finance Management</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-services">
+                <h3>Fee Management</h3>
+                <ul>
+                    <li><a href="#">Visitor Management</a></li>
+                    <li><a href="#">Student Information</a></li>
+                    <li><a href="#">Admission Management</a></li>
+                    <li><a href="#">Exam Proctoring</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-services">
+                <h3>Transport App</h3>
+                <ul>
+                    <li><a href="#">HR Management</a></li>
+                    <li><a href="#">Biometric Integration</a></li>
+                    <li><a href="#">GPS & Bus Tracking</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-services">
+                <h3>Library Management</h3>
+                <ul>
+                    <li><a href="#">Staff Payroll</a></li>
+                    <li><a href="#">Digital Content</a></li>
+                    <li><a href="#">RFID System</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2025 VAMSConnect Technologies Pvt. Ltd. | All Rights Reserved.
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize carousel
+        var myCarousel = new bootstrap.Carousel(document.getElementById('edu-slider'), {
+            interval: 10000,
+            wrap: true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animate on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Tab functionality
+        function openTab(evt, tabName) {
+            // Hide all tab content
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove active class from all tabs
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            // Show the current tab and add active class
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Why VAMSConnect tabs
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab content data
+            const tabData = {
+                interface: {
+                    title: "User-Friendly Interface",
+                    content: "Our School ERP is created with users in mind. Anyone with basic knowledge of computers and email can start using an application within a few minutes of their first login. The User Interface of ERP school software being easy to use and quite interactive facilitates different users at school to manage operations efficiently without any technical help from an engineer.",
+                    image: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                security: {
+                    title: "Data Security and Backup",
+                    content: "A cloud-based service saves data on the cloud instead of saving it on decentralized databases hence, the data can be retrieved easily. Data backup is automatic and the school doesn't have to invest in hardware to store data. Also, IP Restriction, OTP Authentication, and Role Based User Access with Audit Logs are maintained using our ERP.",
+                    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                support: {
+                    title: "Excellent Client Support",
+                    content: "We believe in providing better assistance along with satisfying resolutions for any software issues. Also, we have a team of dedicated technical support for the parent help desk, to receive parent queries, whether it is about issues in logging into the portal or other unrelated issues. We ensure that the issues get resolved at the earliest with higher rates of contentment. VAMSConnect's School ERP is a one-stop solution that makes the process run smoothly and builds credibility.",
+                    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                accessibility: {
+                    title: "Anytime and Anywhere Accessibility",
+                    content: "The cloud-based technology allows the VAMSConnect ERP to be used anywhere anytime. All that is required is an internet connection.",
+                    image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                migrations: {
+                    title: "Easy Data Migration",
+                    content: "The implementation of VAMSConnect ERP is well-planned and the setup is done without taking much time. The module has the data posting option of previous years records.",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                communications: {
+                    title: "Easy and Faster Communication",
+                    content: "Parents do not need to visit the school each time to have discussions with the respective class teachers or subject teachers to gauge the student's progress. This ERP provides options for the teacher for reading daily remarks about students which facilitates a faster and more efficient model of communication between parents and schools.",
+                    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                },
+                paperless: {
+                    title: "Paperless Work & Better Reporting",
+                    content: "No doubt, school-related work includes lots of paperwork. Sometimes, things are hard to accomplish without software as it comes along with many limitations like the data being lost or getting damaged. However, using VAMSConnect ERP can bring an end to all these limitations. The ERP provides various reports that would be required by the school management team. Reports related to fees, admissions, and various others. Our ERP provides better reporting to thousands of users with zero downtime.",
+                    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                }
+            };
+
+            // DOM elements
+            const featureItems = document.querySelectorAll('.feature-item');
+            const indicators = document.querySelectorAll('.indicator');
+            const featureText = document.querySelector('.feature-text');
+            const featureImage = document.querySelector('.feature-image');
+            const connectBtn = document.querySelector('.connect-btn');
+
+            // Auto-rotate variables
+            let currentTabIndex = 0;
+            let tabInterval;
+            const tabKeys = Object.keys(tabData);
+
+            // Function to switch tabs
+            function switchTab(tabName) {
+                // Update UI elements
+                const tab = tabData[tabName];
+                featureText.querySelector('h2').textContent = tab.title;
+                featureText.querySelector('p').textContent = tab.content;
+                featureImage.style.backgroundImage = `url('${tab.image}')`;
+
+                // Update active states
+                featureItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.tab === tabName) {
+                        item.classList.add('active');
+                    }
+                });
+
+                indicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                    if (indicator.dataset.tab === tabName) {
+                        indicator.classList.add('active');
+                    }
+                });
+
+                // Reset auto-rotate timer
+                resetAutoRotate();
+            }
+
+            // Function to reset auto-rotate timer
+            function resetAutoRotate() {
+                clearInterval(tabInterval);
+                tabInterval = setInterval(autoRotateTabs, 5000);
+            }
+
+            // Function to auto-rotate tabs
+            function autoRotateTabs() {
+                currentTabIndex = (currentTabIndex + 1) % tabKeys.length;
+                const nextTab = tabKeys[currentTabIndex];
+                switchTab(nextTab);
+            }
+
+            // Event listeners
+            featureItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const tabName = this.dataset.tab;
+                    currentTabIndex = tabKeys.indexOf(tabName);
+                    switchTab(tabName);
+                });
+            });
+
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function () {
+                    const tabName = this.dataset.tab;
+                    currentTabIndex = tabKeys.indexOf(tabName);
+                    switchTab(tabName);
+                });
+            });
+
+            // Start auto-rotate
+            resetAutoRotate();
+
+            // Testimonial slider
+            const slider = document.querySelector('.testimonial-slider');
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+
+            let currentIndex = 0;
+            const testimonialsPerView = 3;
+            const totalTestimonials = testimonials.length;
+            const totalSlides = Math.ceil(totalTestimonials / testimonialsPerView);
+            let autoSlideInterval;
+
+            // Initialize slider
+            function initSlider() {
+                // Update dots based on total slides
+                const dotsContainer = document.querySelector('.slider-controls');
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+                    dot.setAttribute('data-index', i);
+                    dot.addEventListener('click', function () {
+                        goToSlide(parseInt(this.getAttribute('data-index')));
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+
+                updateSlider();
+            }
+
+            // Set initial position
+            function updateSlider() {
+                const translateXValue = -currentIndex * (100 / testimonialsPerView);
+                slider.style.transform = `translateX(${translateXValue}%)`;
+
+                // Update dots
+                const dots = document.querySelectorAll('.slider-dot');
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            // Auto slide every 5 seconds
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000);
+            }
+
+            startAutoSlide();
+
+            // Reset auto slide timer when user interacts
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            // Go to specific slide
+            function goToSlide(index) {
+                currentIndex = index;
+                updateSlider();
+                resetAutoSlide();
+            }
+
+            // Next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            }
+
+            // Previous slide
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            // Pause auto slide on hover
+            slider.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+
+            slider.addEventListener('mouseleave', () => {
+                resetAutoSlide();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetAutoSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetAutoSlide();
+                }
+            });
+
+            // Initialize the slider
+            initSlider();
+
+            // Equalize card heights
+            function equalizeCardHeights() {
+                const cards = document.querySelectorAll('.testimonial-card');
+                let maxHeight = 0;
+
+                // Reset heights first
+                cards.forEach(card => {
+                    card.style.height = 'auto';
+                });
+
+                // Find max height in each group of 3 cards
+                for (let i = 0; i < cards.length; i += testimonialsPerView) {
+                    maxHeight = 0;
+                    const group = Array.from(cards).slice(i, i + testimonialsPerView);
+
+                    group.forEach(card => {
+                        const cardHeight = card.offsetHeight;
+                        if (cardHeight > maxHeight) maxHeight = cardHeight;
+                    });
+
+                    group.forEach(card => {
+                        card.style.height = `${maxHeight}px`;
+                    });
+                }
+            }
+
+            // Call initially and on window resize
+            window.addEventListener('load', equalizeCardHeights);
+            window.addEventListener('resize', equalizeCardHeights);
+            // CAPTCHA checkbox
+            const captchaCheckbox = document.getElementById('captchaCheckbox');
+            const submitBtn = document.getElementById('submitBtn');
+
+            captchaCheckbox.addEventListener('click', function () {
+                this.classList.toggle('checked');
+                submitBtn.disabled = !this.classList.contains('checked');
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        // Define these functions before they're used
+        function moveCarousel(carousel, direction) {
+            const container = carousel.querySelector('.card-container');
+            const cards = container.querySelectorAll('.card');
+            if (cards.length === 0) return;
+
+            const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+            const scrollAmount = cardWidth * 3 * direction; // move 3 cards at a time
+            const currentScroll = getCurrentScroll(carousel);
+
+            // Calculate max scroll
+            const maxScroll = (cards.length * cardWidth) - (3 * cardWidth);
+            let newScroll = currentScroll + scrollAmount;
+
+            // Boundary checks
+            newScroll = Math.max(0, Math.min(newScroll, maxScroll));
+
+            container.style.transform = `translateX(${-newScroll}px)`;
+            updateDots(carousel);
+        }
+
+        function slideTo(carousel, index) {
+            const container = carousel.querySelector('.card-container');
+            const cards = container.querySelectorAll('.card');
+            if (cards.length === 0) return;
+
+            const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+            const scrollAmount = cardWidth * 3 * index; // move to 3-card group
+
+            container.style.transform = `translateX(${-scrollAmount}px)`;
+            updateDots(carousel);
+        }
+
+        function getCurrentScroll(carousel) {
+            const container = carousel.querySelector('.card-container');
+            const style = window.getComputedStyle(container);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            return matrix.m41;
+        }
+
+        function updateDots(carousel) {
+            const container = carousel.querySelector('.card-container');
+            const dotsContainer = carousel.parentNode.querySelector('.carousel-dots');
+            if (!dotsContainer) return;
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+            const cards = container.querySelectorAll('.card');
+            if (cards.length === 0) return;
+
+            const cardWidth = cards[0].offsetWidth + 20;
+            const currentPosition = Math.abs(getCurrentScroll(carousel)) / (cardWidth * 3);
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', Math.round(currentPosition) === index);
+            });
+        }
+
+        // Initialize dots based on number of card groups
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                const container = tab.querySelector('.card-container');
+                if (!container) return;
+
+                const cards = container.querySelectorAll('.card');
+                const dotContainer = tab.querySelector('.carousel-dots');
+                if (!dotContainer) return;
+
+                const groups = Math.ceil(cards.length / 3);
+
+                // Clear existing dots
+                dotContainer.innerHTML = '';
+
+                // Add new dots
+                for (let i = 0; i < groups; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot' + (i === 0 ? ' active' : '');
+                    dot.onclick = function () {
+                        slideTo(tab.querySelector('.carousel-container'), i);
+                    };
+                    dotContainer.appendChild(dot);
+                }
+            });
+        });
+    </script>
+    <script>
+        function selectCard(selectedCard) {
+            // Remove active class from all cards
+            const cards = document.querySelectorAll('.pricing-card');
+            cards.forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Add active class to selected card
+            selectedCard.classList.add('active');
+
+            // Scroll to center the selected card
+            selectedCard.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            });
+        }
+    </script>
+    <script>
+        // Enable the submit button when CAPTCHA is checked
+        document.getElementById('captchaCheckbox').addEventListener('click', function () {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = !submitBtn.disabled;
+        });
+    
+        // Handle form submission
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const formData = {
+                name: document.getElementById('fullName').value,
+                school: document.getElementById('school').value,
+                city: document.getElementById('city').value,
+                email: document.getElementById('email').value,
+                website: document.getElementById('website_input').value,
+                mobile: document.getElementById('mobile').value,
+                address: document.getElementById('address').value,
+                message: document.getElementById('message').value,
+            };
+    
+            fetch('api/v1/customer/detail/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    showPopup('Thank you! Your message has been sent.');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    return response.json().then(data => {
+                        showPopup('There was an error. Please try again later.', false);
+                    });
+                }
+            })            
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error. Please try again later.');
+            });
+            
+        });
+
+        function showPopup(message, isSuccess = true) {
+            const popup = document.getElementById('popupMessage');
+            const text = document.getElementById('popupText');
+            const icon = popup.querySelector('.popup-icon');
+        
+            text.textContent = message;
+            icon.textContent = isSuccess ? '✔' : '✖';
+            popup.style.background = isSuccess ? '#e6f9ec' : '#fbeaea';
+            popup.style.color = isSuccess ? '#2e7d32' : '#c62828';
+            popup.style.borderLeftColor = isSuccess ? '#2e7d32' : '#c62828';
+            icon.style.color = isSuccess ? '#2e7d32' : '#c62828';
+        
+            popup.style.display = 'flex';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 4000);
+        }
+        
+    </script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <div id="popupMessage" class="popup-message">
+        <div class="popup-content success">
+            <span class="popup-icon">✔</span>
+            <span id="popupText">Your message has been sent successfully!</span>
+        </div>
+    </div>
+    
+</body>
+
+</html>

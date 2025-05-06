@@ -129,7 +129,7 @@ WSGI_APPLICATION = "school_app.wsgi.application"
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'vams_sms',
+            'NAME': 'vams_connect_demo',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',

@@ -342,3 +342,7 @@ class HolidayCreateView(LoginRequiredMixin,PermissionRequiredMessageMixin, Succe
     template_name = "corecode/mgt_form.html"
     success_url = reverse_lazy("holidays-list")
     success_message = "New holiday successfully added"
+
+
+def landing_page(request):
+    return render(request, 'index_landing.html')

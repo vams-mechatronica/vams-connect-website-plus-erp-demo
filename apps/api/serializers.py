@@ -421,3 +421,7 @@ class DeliveredNotificationSerializer(serializers.ModelSerializer):
             object = get_object_or_404(ShoutOut, id=obj.object_id)
             return object.title
 
+class CustomerDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerDetail
+        fields = '__all__'

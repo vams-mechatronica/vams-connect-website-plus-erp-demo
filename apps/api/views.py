@@ -869,3 +869,10 @@ class PromoteStudentsAPIView(APIView):
                 )
 
         return Response({"message": "Students promoted successfully."})
+
+
+class CustomerDetailAPI(generics.ListCreateAPIView):
+    queryset = CustomerDetail.objects.all()
+    serializer_class = CustomerDetailSerializer
+    permission_classes = (AllowAny,)
+    authentication_classes = ()

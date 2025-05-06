@@ -84,4 +84,7 @@ urlpatterns = [
     # Trip URLs
     path('trips/', TripListCreateView.as_view(), name='trip-list-create'),
     path('trips/<int:pk>/', TripRetrieveUpdateDestroyView.as_view(), name='trip-detail'),
+
+    # Customer Details
+    path('customer/detail/', CustomerDetailAPI.as_view(),name="customer-details"),
 ]

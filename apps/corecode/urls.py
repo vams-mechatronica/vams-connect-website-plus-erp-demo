@@ -20,12 +20,13 @@ from .views import (
     TermDeleteView,
     TermListView,
     TermUpdateView,
-    SchoolDetailView, HolidayListView, HolidayCreateView
+    SchoolDetailView, HolidayListView, HolidayCreateView, landing_page
 )
 from django_select2.views import AutoResponseView
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="home"),
+    path("",landing_page,name="landing_page"),
+    path("demo", IndexView.as_view(), name="home"),
     path("select2/", include('django_select2.urls')),
 
     path("site-config", SiteConfigView.as_view(), name="configs"),

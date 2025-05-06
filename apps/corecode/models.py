@@ -96,8 +96,8 @@ class AcademicSession(models.Model):
 
     name = models.CharField(max_length=200, unique=True)
     current = models.BooleanField(default=True)
-    start_date = models.DateField(_("Start Date"), auto_now=False, auto_now_add=False)
-    end_date = models.DateField(_("End Date"), auto_now=False, auto_now_add=False)
+    start_date = models.DateField(_("Start Date"), null=True, blank=True)
+    end_date = models.DateField(_("End Date"), null=True, blank=True)
     created_at = models.DateTimeField(_("Created at"), auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True, auto_now_add=False)
 
@@ -118,8 +118,8 @@ class AcademicTerm(models.Model):
 
     name = models.CharField(max_length=20, unique=True)
     current = models.BooleanField(default=True)
-    start_date = models.DateField(_("Start Date"), auto_now=False, auto_now_add=False)
-    end_date = models.DateField(_("End Date"), auto_now=False, auto_now_add=False)
+    start_date = models.DateField(_("Start Date"), null=True, blank=True)
+    end_date = models.DateField(_("End Date"), null=True, blank=True)
     created_at = models.DateTimeField(_("Created at"), auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True, auto_now_add=False)
 
@@ -222,3 +222,26 @@ class Holiday(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.date}"
+
+
+class CustomerDetail(models.Model):
+    name = models.CharField(_("Full Name"), max_length=500)
+    school = models.CharField(_("School/Organization"), max_length=500)
+    city = models.CharField(_("City"), max_length=50)
+    email = models.EmailField(_("Email"), max_length=254)
+    website = models.CharField(_("Website"), max_length=500, null=True, blank=True)
+    mobile = models.CharField(_("Mobile"), max_length=50)
+    address = models.TextField(_("Address"), blank=True, null=True)
+    message = models.TextField(_("Message"), blank=True, null=True)
+    created_at = models.DateTimeField(_("Created At"), auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(_("Updated At"), auto_now=True, auto_now_add=False)
+    
+    class Meta:
+        verbose_name = _("CustomerDetail")
+        verbose_name_plural = _("CustomerDetails")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("CustomerDetail_detail", kwargs={"pk": self.pk})
