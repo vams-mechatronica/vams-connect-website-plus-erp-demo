@@ -1062,7 +1062,7 @@ class BulkWhatsAppMessageUploadView(APIView):
                         {
                         "from": settings.INFOBIP_SENDER_NUMBER,
                         "to": mobile,
-                        "messageId": str(uuid.uuid4),
+                        # "messageId": str(uuid.uuid4),
                         "content": {
                             "templateName": "sms_marketing",
                             "templateData": {
