@@ -1111,4 +1111,8 @@ class BulkWhatsAppMessageUploadView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
+    
+    def get(self, request):
+        data = WhatsAppOutboundMessage.objects.all()
+        serializer = WhatsappOutboundSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

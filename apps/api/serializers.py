@@ -7,7 +7,7 @@ from apps.user.models import *
 from apps.students.models import *
 from apps.transport.models import *
 from apps.notifications.models import *
-from .models import APKVersion, ErrorLog
+from .models import  *
 from rest_framework import serializers
 from django.contrib.auth.models import User,Permission
 from django.shortcuts import get_object_or_404
@@ -424,4 +424,9 @@ class DeliveredNotificationSerializer(serializers.ModelSerializer):
 class CustomerDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerDetail
+        fields = '__all__'
+
+class WhatsappOutboundSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WhatsAppOutboundMessage
         fields = '__all__'
