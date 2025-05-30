@@ -92,7 +92,7 @@ class WhatsAppOutboundMessage(models.Model):
     recipient_name = models.CharField(max_length=255, blank=True, null=True, help_text="Name of the recipient (if available)")
 
     # Message Details
-    message_id = models.CharField(max_length=255, unique=True, help_text="Unique ID of the message from Infobip (if available)")
+    message_id = models.CharField(max_length=255, help_text="Unique ID of the message from Infobip (if available)")
     message_content = models.TextField(help_text="Content of the WhatsApp message")
     message_type = models.CharField(
         max_length=50,
