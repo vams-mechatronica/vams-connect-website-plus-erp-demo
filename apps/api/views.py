@@ -1052,7 +1052,7 @@ class BulkWhatsAppMessageUploadView(APIView):
                 message_content = "sms_marketing"
 
                 # Save and send message
-                api_url = "https://api.infobip.com/whatsapp/1/message"
+                api_url = "https://2vmy9l.api.infobip.com/whatsapp/1/message/template"
                 headers = {
                     "Authorization": f"App {settings.INFOBIP_API_KEY}",
                     "Content-Type": "application/json"
