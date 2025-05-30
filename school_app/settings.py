@@ -286,3 +286,7 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER','info@vamsmechatronica.in')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD','OneManArmy3$')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_EMAIL_FROM','VAMS Mechatronica<info@vamsmechatronica.in>')
+
+INFOBIP_API_KEY = "1df6da9de0f3146a6974d2341f9009e3-6c2d2d67-30ea-4449-bfb2-fd7cab2efb4f"
+INFOBIP_SEND_TEMPLATE_MESSAGE_API_URL = "https://2vmy9l.api.infobip.com/whatsapp/1/message/template"
+INFOBIP_SENDER_NUMBER = "12248140388"

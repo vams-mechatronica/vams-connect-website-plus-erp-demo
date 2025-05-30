@@ -20,8 +20,9 @@ from rest_framework.authentication import BasicAuthentication,TokenAuthenticatio
 from urllib.parse import urlencode
 from django.views.decorators.csrf import csrf_exempt
 import requests
+import uuid
 import json
-
+import pandas as pd
 from django.conf import settings
 from django.http import JsonResponse
 from django.utils.dateparse import parse_datetime
@@ -885,9 +886,22 @@ class CustomerDetailAPI(generics.ListCreateAPIView):
     authentication_classes = ()
 
 
-@csrf_exempt
-def whatsapp_webhook(request):
-    if request.method == "POST":
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.dateparse import parse_datetime
+
+
+from .models import (
+    WhatsAppInboundMessage,
+    WhatsappDeliveryStatus,
+    WhatsappSeenReport,
+    WhatsAppOutboundMessage
+)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class WhatsAppWebhookView(APIView):
+    def post(self, request):
         try:
             data = json.loads(request.body)
             WhatsAppInboundMessage.objects.create(
@@ -899,21 +913,19 @@ def whatsapp_webhook(request):
                 received_at=data['timestamp'],
                 metadata=data
             )
-            return JsonResponse({"status": "success"}, status=201)
+            return Response({"status": "success"}, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)}, status=400)
-    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+            return Response({"status": "error", "message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
-def add_delivery_status(request):
-    if request.method == 'POST':
+@method_decorator(csrf_exempt, name='dispatch')
+class AddDeliveryStatusView(APIView):
+    def post(self, request):
         try:
             body = json.loads(request.body)
-            results = body.get('results')
+            results = body.get('results', [])
             for data in results:
-                # data = json.loads(dat)
-                delivery_status = WhatsappDeliveryStatus(
+                WhatsappDeliveryStatus.objects.create(
                     message_id=data['messageId'],
                     to=data['to'],
                     sent_at=parse_datetime(data['sentAt']),
@@ -932,25 +944,24 @@ def add_delivery_status(request):
                     price_per_message=data['price']['pricePerMessage'],
                     currency=data['price']['currency']
                 )
-                delivery_status.save()
-            return JsonResponse({"message": "Delivery status added successfully!"}, status=201)
+            return Response({"message": "Delivery status added successfully!"}, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
-    return JsonResponse({"error": "Invalid method"}, status=405)
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-@csrf_exempt
-def get_delivery_status(request):
-    if request.method == 'GET':
+
+@method_decorator(csrf_exempt, name='dispatch')
+class GetDeliveryStatusView(APIView):
+    def get(self, request):
         statuses = list(WhatsappDeliveryStatus.objects.values())
-        return JsonResponse(statuses, safe=False, status=200)
-    return JsonResponse({"error": "Invalid method"}, status=405)
+        return Response(statuses, status=status.HTTP_200_OK)
 
-@csrf_exempt
-def add_seen_report(request):
-    if request.method == 'POST':
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddSeenReportView(APIView):
+    def post(self, request):
         try:
             data = json.loads(request.body)
-            seen_report = WhatsappSeenReport(
+            WhatsappSeenReport.objects.create(
                 message_id=data['messageId'],
                 sender=data['from'],
                 recipient=data['to'],
@@ -959,60 +970,145 @@ def add_seen_report(request):
                 application_id=data.get('applicationId'),
                 entity_id=data.get('entityId')
             )
-            seen_report.save()
-            return JsonResponse({"message": "Seen report added successfully!"}, status=201)
+            return Response({"message": "Seen report added successfully!"}, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
-    return JsonResponse({"error": "Invalid method"}, status=405)
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class SendWhatsAppMessageView(APIView):
+    def post(self, request):
+        try:
+            data = request.data
+            recipient_number = data['recipient_number']
+            message_content = data['message_content']
+            message_type = data.get('message_type', 'text')
 
-def send_whatsapp_message(recipient_number, message_content, message_type='text'):
-    # Infobip API endpoint and credentials
-    api_url = "https://api.infobip.com/whatsapp/1/message"
-    headers = {
-        "Authorization": f"App {settings.INFOBIP_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "to": recipient_number,
-        "type": message_type,
-        "text": {"body": message_content} if message_type == 'text' else None
-        # Add other message types (e.g., images, documents) as per Infobip API specs
-    }
+            api_url = "https://api.infobip.com/whatsapp/1/message"
+            headers = {
+                "Authorization": f"App {settings.INFOBIP_API_KEY}",
+                "Content-Type": "application/json"
+            }
+            payload = {
+                "to": recipient_number,
+                "type": message_type,
+                "text": {"body": message_content} if message_type == 'text' else None
+            }
 
-    # Save the outbound message to the database
-    outbound_message = WhatsAppOutboundMessage.objects.create(
-        recipient_number=recipient_number,
-        message_content=message_content,
-        message_type=message_type,
-        status='pending'
-    )
+            outbound_message = WhatsAppOutboundMessage.objects.create(
+                recipient_number=recipient_number,
+                message_content=message_content,
+                message_type=message_type,
+                status='pending'
+            )
 
-    try:
-        # Send the message via Infobip
-        response = requests.post(api_url, json=payload, headers=headers)
-        response_data = response.json()
+            response = requests.post(api_url, json=payload, headers=headers)
+            response_data = response.json()
 
-        if response.status_code == 200:
-            outbound_message.status = 'sent'
-            outbound_message.message_id = response_data.get('messageId')
-        else:
+            if response.status_code == 200:
+                outbound_message.status = 'sent'
+                outbound_message.message_id = response_data.get('messageId')
+            else:
+                outbound_message.status = 'failed'
+
+            outbound_message.metadata = response_data
+            outbound_message.sent_at = timezone.now()
+            outbound_message.save()
+
+            return Response({"status": "success", "data": response_data}, status=status.HTTP_200_OK)
+        except Exception as e:
             outbound_message.status = 'failed'
-
-        # Save response metadata
-        outbound_message.metadata = response_data
-        outbound_message.sent_at = timezone.now()
-        outbound_message.save()
-
-        return JsonResponse({"status": "success", "data": response_data}, status=200)
-    except Exception as e:
-        # Update the message status in case of an error
-        outbound_message.status = 'failed'
-        outbound_message.metadata = {"error": str(e)}
-        outbound_message.save()
-
-        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            outbound_message.metadata = {"error": str(e)}
+            outbound_message.save()
+            return Response({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class BulkWhatsAppMessageUploadView(APIView):
+    def post(self, request):
+        file = request.FILES.get('file')
+        if not file:
+            return Response({"error": "No file uploaded."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Read the file (supports both CSV and Excel)
+            if file.name.endswith('.csv'):
+                df = pd.read_csv(file)
+            elif file.name.endswith(('.xls', '.xlsx')):
+                df = pd.read_excel(file)
+            else:
+                return Response({"error": "Unsupported file type. Please upload CSV or Excel."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Check required columns
+            if 'name' not in df.columns or 'mobile' not in df.columns:
+                return Response({"error": "File must contain 'name' and 'mobile' columns."}, status=status.HTTP_400_BAD_REQUEST)
+
+            results = []
+            for _, row in df.iterrows():
+                name = str(row['name'])
+                mobile = str(row['mobile'])
+
+                # Customize message here
+                message_content = "sms_marketing"
+
+                # Save and send message
+                api_url = "https://api.infobip.com/whatsapp/1/message"
+                headers = {
+                    "Authorization": f"App {settings.INFOBIP_API_KEY}",
+                    "Content-Type": "application/json"
+                }
+                payload = {
+                    "messages": [
+                        {
+                        "from": settings.INFOBIP_SENDER_NUMBER,
+                        "to": mobile,
+                        "messageId": str(uuid.uuid4),
+                        "content": {
+                            "templateName": "sms_marketing",
+                            "templateData": {
+                            "body": {
+                                "placeholders": [name]
+                            }
+                            },
+                            "language": "en"
+                        },
+                        "callbackData": "Callback data",
+                        "notifyUrl": "https://www.vamsconnect.com/api/v1/whatsapp/delivery-status/add"
+                        }
+                    ]
+                }
+
+                outbound_message = WhatsAppOutboundMessage.objects.create(
+                    recipient_number=mobile,
+                    message_content=message_content,
+                    message_type='text',
+                    status='pending'
+                )
+
+                try:
+                    response = requests.post(api_url, json=payload, headers=headers)
+                    response_data = response.json()
+
+                    if response.status_code == 200:
+                        outbound_message.status = 'sent'
+                        outbound_message.message_id = response_data.get('messageId')
+                        results.append({"mobile": mobile, "status": "sent"})
+                    else:
+                        outbound_message.status = 'failed'
+                        results.append({"mobile": mobile, "status": "failed", "error": response_data})
+
+                    outbound_message.metadata = response_data
+                    outbound_message.sent_at = timezone.now()
+                    outbound_message.save()
+
+                except Exception as e:
+                    outbound_message.status = 'failed'
+                    outbound_message.metadata = {"error": str(e)}
+                    outbound_message.save()
+                    results.append({"mobile": mobile, "status": "error", "error": str(e)})
+
+            return Response({"message": "Processing complete", "results": results}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 

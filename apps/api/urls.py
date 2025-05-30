@@ -88,9 +88,11 @@ urlpatterns = [
     # Customer Details
     path('customer/detail/', CustomerDetailAPI.as_view(),name="customer-details"),
 
-    path('whatsapp/inbound/webhook',whatsapp_webhook),
-    path('whatsapp/send-message',send_whatsapp_message),
-    path('whatsapp/delivery-status/add',add_delivery_status),
-    path('whatsapp/delivery-status/get',get_delivery_status),
-    path('whatsapp/seen-report/add',add_seen_report)
+    path('whatsapp/inbound/webhook',WhatsAppWebhookView.as_view()),
+    path('whatsapp/send-message',SendWhatsAppMessageView.as_view()),
+    path('whatsapp/delivery-status/add',AddDeliveryStatusView.as_view()),
+    path('whatsapp/delivery-status/get',GetDeliveryStatusView.as_view()),
+    path('whatsapp/seen-report/add',AddSeenReportView.as_view()),
+    path('whatsapp/bulk-send/', BulkWhatsAppMessageUploadView.as_view(), name='bulk-whatsapp-send'),
+
 ]
