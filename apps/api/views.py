@@ -1045,8 +1045,24 @@ class BulkWhatsAppMessageUploadView(APIView):
 
             results = []
             for _, row in df.iterrows():
-                name = str(row['name'])
-                mobile = str(row['mobile'])
+                name = str(row['name']).strip()
+                mobile = str(row['mobile']).strip()
+
+                # Remove non-digit characters
+                mobile = ''.join(filter(str.isdigit, mobile))
+
+                # Handle suffix: If length > 10, take last 10 digits and prefix with '91'
+                if len(mobile) > 10:
+                    mobile = '91' + mobile[-10:]
+                elif len(mobile) == 10:
+                    mobile = '91' + mobile
+                else:
+                    continue  # Skip if number is too short
+
+                # Check if number starts with valid digit
+                if mobile[2] not in ['6', '7', '8', '9']:
+                    continue  # Skip invalid mobile number
+
 
                 # Customize message here
                 message_content = "sms_marketing"
@@ -1160,7 +1176,7 @@ class WhatsAppPhoneStatsAPIView(APIView):
                 "error": d.error_description if d.error_permanent else None
             } for d in delivery_reports]
 
-            failed_delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number,status_name__icontains="FAILED")
+            failed_delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number,error_permanent=True)
             failed_delivery_data = [{
                 "message_id": d.message_id,
                 "status": d.status_name,
@@ -1185,7 +1201,7 @@ class WhatsAppPhoneStatsAPIView(APIView):
             delivery_stats = {
                 "total_sent": outbound_msgs.count(),
                 "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED_TO_HANDSET").count(),
-                "total_failed": delivery_reports.filter(status_name__icontains="FAILED").count(),
+                "total_failed": delivery_reports.filter(error_permanent=True).count(),
                 "total_pending": delivery_reports.filter(status_name__icontains="PENDING").count(),
             }
 
