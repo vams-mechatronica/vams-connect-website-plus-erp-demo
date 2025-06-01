@@ -1116,3 +1116,59 @@ class BulkWhatsAppMessageUploadView(APIView):
         data = WhatsAppOutboundMessage.objects.all()
         serializer = WhatsappOutboundSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class WhatsAppPhoneFullStatsAPIView(APIView):
+    def get(self, request):
+        phone_number = request.query_params.get('phone_number', None)
+        data = {}
+
+        if phone_number:
+            phone_numbers = [phone_number]
+        else:
+            phone_numbers = WhatsAppOutboundMessage.objects.values_list('recipient_number', flat=True).distinct()
+
+        for number in phone_numbers:
+            # Outbound messages
+            outbound_msgs = WhatsAppOutboundMessage.objects.filter(recipient_number=number)
+            outbound_data = []
+            for msg in outbound_msgs:
+                # Delivery info
+                try:
+                    delivery = WhatsappDeliveryStatus.objects.get(message_id=msg.message_id)
+                    delivery_info = {
+                        "status_name": delivery.status_name,
+                        "status_description": delivery.status_description,
+                        "done_at": delivery.done_at,
+                        "price": str(delivery.price_per_message),
+                        "currency": delivery.currency,
+                    }
+                except WhatsappDeliveryStatus.DoesNotExist:
+                    delivery_info = None
+
+                outbound_data.append({
+                    "message_id": msg.message_id,
+                    "content": msg.message_content,
+                    "type": msg.message_type,
+                    "status": msg.status,
+                    "sent_at": msg.sent_at,
+                    "delivery": delivery_info,
+                })
+
+            # Inbound replies
+            inbound_msgs = WhatsAppInboundMessage.objects.filter(sender_number=number).order_by('-received_at')
+            inbound_data = [{
+                "message_id": reply.message_id,
+                "content": reply.message_content,
+                "type": reply.message_type,
+                "received_at": reply.received_at
+            } for reply in inbound_msgs]
+
+            data[number] = {
+                "total_sent": outbound_msgs.count(),
+                "total_replies": inbound_msgs.count(),
+                "sent_messages": outbound_data,
+                "replies": inbound_data
+            }
+
+        return Response(data, status=status.HTTP_200_OK)
