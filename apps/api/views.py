@@ -1162,9 +1162,9 @@ class WhatsAppPhoneStatsAPIView(APIView):
 
             delivery_stats = {
                 "total_sent": outbound_msgs.count(),
-                "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED").count(),
-                "total_failed": delivery_reports.filter(status_name__iexact="FAILED").count(),
-                "total_pending": delivery_reports.filter(status_name__iexact="PENDING").count(),
+                "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED_TO_HANDSET").count(),
+                "total_failed": delivery_reports.filter(status_name__icontains="FAILED").count(),
+                "total_pending": delivery_reports.filter(status_name__icontains="PENDING").count(),
             }
 
             response_data[number] = {
