@@ -1118,57 +1118,61 @@ class BulkWhatsAppMessageUploadView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class WhatsAppPhoneFullStatsAPIView(APIView):
+class WhatsAppPhoneStatsAPIView(APIView):
     def get(self, request):
-        phone_number = request.query_params.get('phone_number', None)
-        data = {}
+        phone_number = request.query_params.get('phone_number')
+        response_data = {}
 
-        if phone_number:
-            phone_numbers = [phone_number]
-        else:
-            phone_numbers = WhatsAppOutboundMessage.objects.values_list('recipient_number', flat=True).distinct()
+        phone_numbers = [phone_number] if phone_number else WhatsAppOutboundMessage.objects.values_list('recipient_number', flat=True).distinct()
 
         for number in phone_numbers:
             # Outbound messages
             outbound_msgs = WhatsAppOutboundMessage.objects.filter(recipient_number=number)
             outbound_data = []
             for msg in outbound_msgs:
-                # Delivery info
-                try:
-                    delivery = WhatsappDeliveryStatus.objects.get(message_id=msg.message_id)
-                    delivery_info = {
-                        "status_name": delivery.status_name,
-                        "status_description": delivery.status_description,
-                        "done_at": delivery.done_at,
-                        "price": str(delivery.price_per_message),
-                        "currency": delivery.currency,
-                    }
-                except WhatsappDeliveryStatus.DoesNotExist:
-                    delivery_info = None
-
                 outbound_data.append({
                     "message_id": msg.message_id,
                     "content": msg.message_content,
                     "type": msg.message_type,
                     "status": msg.status,
                     "sent_at": msg.sent_at,
-                    "delivery": delivery_info,
+                    "created_at": msg.created_at,
                 })
 
-            # Inbound replies
-            inbound_msgs = WhatsAppInboundMessage.objects.filter(sender_number=number).order_by('-received_at')
+            # Replies
+            inbound_msgs = WhatsAppInboundMessage.objects.filter(sender_number=number)
             inbound_data = [{
-                "message_id": reply.message_id,
-                "content": reply.message_content,
-                "type": reply.message_type,
-                "received_at": reply.received_at
-            } for reply in inbound_msgs]
+                "message_id": im.message_id,
+                "content": im.message_content,
+                "type": im.message_type,
+                "received_at": im.received_at
+            } for im in inbound_msgs]
 
-            data[number] = {
+            # Delivery reports
+            delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number)
+            delivery_data = [{
+                "message_id": d.message_id,
+                "status": d.status_name,
+                "description": d.status_description,
+                "done_at": d.done_at,
+                "price": str(d.price_per_message),
+                "currency": d.currency,
+                "error": d.error_description if d.error_permanent else None
+            } for d in delivery_reports]
+
+            delivery_stats = {
                 "total_sent": outbound_msgs.count(),
-                "total_replies": inbound_msgs.count(),
+                "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED").count(),
+                "total_failed": delivery_reports.filter(status_name__iexact="FAILED").count(),
+                "total_pending": delivery_reports.filter(status_name__iexact="PENDING").count(),
+            }
+
+            response_data[number] = {
                 "sent_messages": outbound_data,
+                "delivery_stats": delivery_stats,
+                "delivery_details": delivery_data,
+                "total_replies": inbound_msgs.count(),
                 "replies": inbound_data
             }
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(response_data, status=status.HTTP_200_OK)

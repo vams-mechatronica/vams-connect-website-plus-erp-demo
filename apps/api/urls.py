@@ -94,7 +94,7 @@ urlpatterns = [
     path('whatsapp/delivery-status/get',GetDeliveryStatusView.as_view()),
     path('whatsapp/seen-report/add',AddSeenReportView.as_view()),
     path('whatsapp/bulk-send/', BulkWhatsAppMessageUploadView.as_view(), name='bulk-whatsapp-send'),
-    path('whatsapp/stats/', WhatsAppPhoneFullStatsAPIView.as_view(), name='whatsapp-phone-full-stats')
+    path('whatsapp/stats/', WhatsAppPhoneStatsAPIView.as_view(), name='whatsapp-phone-full-stats')
 
 
 ]
