@@ -212,7 +212,7 @@ class EmailMessageImageLink(models.Model):
         verbose_name_plural = _("EmailMessageImageLinks")
 
     def __str__(self):
-        return self.pk
+        return "Email Images link"
 
 class Holiday(models.Model):
     name = models.CharField(max_length=100)
