@@ -1201,8 +1201,8 @@ class WhatsAppPhoneStatsAPIView(APIView):
             delivery_stats = {
                 "total_sent": outbound_msgs.count(),
                 "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED_TO_HANDSET").count(),
-                "total_failed": delivery_reports.filter(error_permanent=True).count(),
-                "total_pending": delivery_reports.filter(status_name__icontains="PENDING").count(),
+                "total_failed": failed_delivery_reports.count(),
+                "total_pending": pending_delivery_reports.count(),
             }
 
             response_data[number] = {
