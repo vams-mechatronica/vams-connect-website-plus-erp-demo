@@ -1149,7 +1149,7 @@ class WhatsAppPhoneStatsAPIView(APIView):
             } for im in inbound_msgs]
 
             # Delivery reports
-            delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number)
+            delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number,status_name__iexact="DELIVERED_TO_HANDSET")
             delivery_data = [{
                 "message_id": d.message_id,
                 "status": d.status_name,
@@ -1160,6 +1160,28 @@ class WhatsAppPhoneStatsAPIView(APIView):
                 "error": d.error_description if d.error_permanent else None
             } for d in delivery_reports]
 
+            failed_delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number,status_name__icontains="FAILED")
+            failed_delivery_data = [{
+                "message_id": d.message_id,
+                "status": d.status_name,
+                "description": d.status_description,
+                "done_at": d.done_at,
+                "price": str(d.price_per_message),
+                "currency": d.currency,
+                "error": d.error_description if d.error_permanent else None
+            } for d in failed_delivery_reports]
+
+            pending_delivery_reports = WhatsappDeliveryStatus.objects.filter(to=number,status_name__icontains="PENDING")
+            pending_delivery_data = [{
+                "message_id": d.message_id,
+                "status": d.status_name,
+                "description": d.status_description,
+                "done_at": d.done_at,
+                "price": str(d.price_per_message),
+                "currency": d.currency,
+                "error": d.error_description if d.error_permanent else None
+            } for d in pending_delivery_reports]
+
             delivery_stats = {
                 "total_sent": outbound_msgs.count(),
                 "total_delivered": delivery_reports.filter(status_name__iexact="DELIVERED_TO_HANDSET").count(),
@@ -1168,11 +1190,13 @@ class WhatsAppPhoneStatsAPIView(APIView):
             }
 
             response_data[number] = {
-                "sent_messages": outbound_data,
                 "delivery_stats": delivery_stats,
-                "delivery_details": delivery_data,
                 "total_replies": inbound_msgs.count(),
-                "replies": inbound_data
+                "sent_messages": outbound_data,
+                "replies": inbound_data,
+                "delivery_details": delivery_data,
+                "failed_delivery_details": failed_delivery_data,
+                "pending_delivery_details": pending_delivery_data
             }
 
         return Response(response_data, status=status.HTTP_200_OK)
