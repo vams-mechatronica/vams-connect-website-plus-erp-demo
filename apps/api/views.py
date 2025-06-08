@@ -950,10 +950,9 @@ class AddDeliveryStatusView(APIView):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class GetDeliveryStatusView(APIView):
-    def get(self, request):
-        statuses = list(WhatsappDeliveryStatus.objects.values())
-        return Response(statuses, status=status.HTTP_200_OK)
+class GetDeliveryStatusView(generics.ListAPIView):
+    queryset = WhatsappDeliveryStatus.objects.all()
+    serializer_class = WhatsappDeliveryStatusSerializer
 
 
 @method_decorator(csrf_exempt, name='dispatch')

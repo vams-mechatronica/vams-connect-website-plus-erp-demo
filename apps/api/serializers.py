@@ -430,3 +430,8 @@ class WhatsappOutboundSerializer(serializers.ModelSerializer):
     class Meta:
         model = WhatsAppOutboundMessage
         fields = '__all__'
+
+class WhatsappDeliveryStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WhatsappDeliveryStatus
+        fields = '__all__'
