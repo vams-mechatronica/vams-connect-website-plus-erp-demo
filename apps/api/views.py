@@ -951,8 +951,10 @@ class AddDeliveryStatusView(APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class GetDeliveryStatusView(generics.ListAPIView):
-    queryset = WhatsappDeliveryStatus.objects.all()
+    queryset = WhatsappDeliveryStatus.objects.all().order_by('-sent_at')
     serializer_class = WhatsappDeliveryStatusSerializer
+    filterset = [DjangoFilterBackend]
+    filterset_fields = ['to','sent_at']
 
 
 @method_decorator(csrf_exempt, name='dispatch')
