@@ -32,6 +32,12 @@ class HolidayAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'created_at', 'updated_at')
     ordering = ('-date',)
 
+@admin.register(CustomerDetail)
+class CustomerDetailAdmin(admin.ModelAdmin):
+    list_display = ('name','mobile','email','school','city')
+    search_fields = ('name','school','city','mobile')
+    ordering = ('name','city','email','mobile','school')
+    
     
 
     
